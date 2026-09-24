@@ -53,7 +53,7 @@ test.describe('Cart Page validation', () => {
     })
     
     
-    test("Validate All Products added to the cart page ",async({page}) =>
+    test("Validate Every Products added to the cart page ",async({page}) =>
     {
         const allProductDetails = await productPage.getAllProductDetails();
         await productPage.addAllProductsToCart();

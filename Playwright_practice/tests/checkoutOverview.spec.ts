@@ -30,7 +30,7 @@ test.describe('Checkout Overivew validation', () => {
         await checkoutPage.clickOnContinue();
     })
 
-    test("Validate checkout overview Page and UI element",async({page}) =>
+    test("Validate checkout overview Page and UI elements",async({page}) =>
     {
         await expect(page).toHaveURL("https://www.saucedemo.com/checkout-step-two.html");
         const elements = await checkoutOverviewPage.getcheckoutOverviewElements();
