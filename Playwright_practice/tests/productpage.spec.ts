@@ -25,7 +25,7 @@ test.describe('Product Page Tests', () => {
         await expect(page).toHaveURL('https://www.saucedemo.com/');
     });
 
-    test('Verify about page and navigation back', async ({ page }) => {
+    test('Verify about page and navigation back functionality', async ({ page }) => {
         await productPage.aboutpage();
         await expect(page.getByRole('link', { name: 'Book a Demo' }).nth(1)).toBeVisible();
         await expect(page.getByRole('link', { name: 'Start Free' }).first()).toBeVisible();
@@ -35,7 +35,7 @@ test.describe('Product Page Tests', () => {
         
     });
 
-    test('validate product page', async ({ page }) =>
+    test('validate product page functionality', async ({ page }) =>
     {
         await productPage.validateAllProductsDisplayed();
         await productPage.addFirstProductToCart();
@@ -43,7 +43,7 @@ test.describe('Product Page Tests', () => {
 
     })
 
-    test('Validate Adding specific products to cart', async ({ page }) => 
+    test('Validate Adding specific products to cart functionality', async ({ page }) => 
     {
         await productPage.addSpecificProductsToCart(productsToCart);
     })
