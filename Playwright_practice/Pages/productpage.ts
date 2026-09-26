@@ -120,7 +120,7 @@ export class productpage {
         }));
     }
 
-    async getSpecificproductDetails(productNames: string[]) {
+    /*async getSpecificproductDetails(productNames: string[]) {
         const normalizedTargetNames = productNames.map(normalizeText);
 
         const allNames = await this.page.locator(productlocators.productnames).allTextContents();
@@ -139,4 +139,17 @@ export class productpage {
 
         return orderedProducts;
     }
-}
+}*/
+
+// Playwright_practice/Pages/productpage.ts
+
+async getSpecificproductDetails(productNames: string[]) {
+    const targetNames = productNames.map(normalizeText);
+
+    const allProducts = await this.getAllProductDetails();
+
+    return allProducts.filter(product =>
+        targetNames.includes(product.name)
+    );
+}}
+
