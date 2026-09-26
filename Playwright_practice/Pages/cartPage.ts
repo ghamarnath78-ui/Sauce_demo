@@ -1,20 +1,19 @@
+// Playwright_practice/Pages/cartPage.ts
 import { Page } from "@playwright/test";
 import { cartPageLocators } from "../Locators/cartPageLocators";
 
-export class cartPage
-{
-    constructor(private page : Page)
-    {
+const normalizeText = (value: string | null | undefined) => {
+    return value?.replace(/\s+/g, ' ').trim() ?? '';
+};
 
-    }
-    async clickOnContinueShopping()
-    {
+export class cartPage {
+    constructor(private page: Page) { }
+
+    async clickOnContinueShopping() {
         await this.page.locator(cartPageLocators.continueshopping).click();
-
     }
 
-    async getCartPageElement()
-    {
+    async getCartPageElement() {
         return {
             cartTitle: this.page.locator(cartPageLocators.cartTitle),
             shoppingCart: this.page.locator(cartPageLocators.continueshopping),
@@ -22,31 +21,25 @@ export class cartPage
         };
     }
 
-    async getCartProducts()
-            {
-                const allNames = await this.page.locator(cartPageLocators.productnames).allTextContents();
-                const allDescription = await this.page.locator(cartPageLocators.productDescription).allTextContents();
-                const allPrice = await this.page.locator(cartPageLocators.productPrices).allTextContents();
-        
-                const allCartProducts = allNames.map((_, i)=>//return allNames.map((_, i) => 
-                ({
-                name: allNames[i]?.trim() ?? '',
-                description: allDescription[i]?.trim() ?? '',
-                price: allPrice[i]?.trim() ?? '',
-                //array of object [{name,description,prices}, {} , {}]
-        
+    async getCartProducts() {
+        const allNames = await this.page.locator(cartPageLocators.productnames).allTextContents();
+        const allDescription = await this.page.locator(cartPageLocators.productDescription).allTextContents();
+        const allPrice = await this.page.locator(cartPageLocators.productPrices).allTextContents();
+
+        return allNames
+            .map((_, i) => ({
+                name: normalizeText(allNames[i]),
+                description: normalizeText(allDescription[i]),
+                price: normalizeText(allPrice[i])
             }))
-        
-            return allCartProducts;
-        }
+            .filter(product => product.name !== '');
+    }
 
-        async removeFirstProduct()
-        {
-            await this.page.locator(cartPageLocators.removeButton).first().click();
-        }
+    async removeFirstProduct() {
+        await this.page.locator(cartPageLocators.removeButton).first().click();
+    }
 
-        async clickCheckoutButton()
-        {
-            await this.page.locator(cartPageLocators.checkoutbutton).click();
-        }
+    async clickCheckoutButton() {
+        await this.page.locator(cartPageLocators.checkoutbutton).click();
+    }
 }

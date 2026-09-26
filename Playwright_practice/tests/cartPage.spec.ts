@@ -62,11 +62,13 @@ test.describe('Cart Page validation', () => {
         expect(cartProducts).toEqual(allProductDetails);
 
     })
-    test("Validate Specific products added to the cart page",async({page}) =>
+
+
+    test("Validate Specific products added to the cart page", async ({ page }) => 
     {
         const specificdetails = await productPage.getSpecificproductDetails(productsToCart);
         await productPage.addSpecificProductsToCart(productsToCart);
-         await productPage.clickCartLink();
+        await productPage.clickCartLink();
         const cartProducts = await cartPageObject.getCartProducts();
         expect(cartProducts).toEqual(specificdetails);
     })
@@ -80,8 +82,6 @@ test.describe('Cart Page validation', () => {
         await cartPageObject.removeFirstProduct();
         const updatedCartProducts = await cartPageObject.getCartProducts();
         expect(updatedCartProducts.length).toBe(initialProducts.length-1);
-        
-
     })
 
 })
