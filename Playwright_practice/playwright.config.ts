@@ -14,11 +14,8 @@ export default defineConfig({
     browserName: 'chromium',
     headless: true,
     viewport: { width: 1280, height: 720 },
-
-    // Do not use slowMo in CI
     actionTimeout: 40_000,
     navigationTimeout: 30_000,
-
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
